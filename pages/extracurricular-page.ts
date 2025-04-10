@@ -46,7 +46,8 @@ export class ExtracurricularPage extends BasePage {
         for (const activity of activities) {
             await this.addExtracurricularActivity(activity);
         }
-        this.page.waitForTimeout(6000)
+
+        await this.nextPageButton.click();
         await this.nextPageButton.click();
         this.page.waitForTimeout(3000)
     }
