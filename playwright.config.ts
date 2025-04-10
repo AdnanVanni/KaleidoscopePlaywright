@@ -1,4 +1,4 @@
-import { defineConfig, devices } from 'playwright/test'
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
     testDir: 'e2e',
@@ -9,9 +9,35 @@ export default defineConfig({
     fullyParallel: true,
     workers: 4,
     reporter: 'list',
-    use: {
 
-        browserName: 'chromium',
-        headless: true,
+
+    use: {
+        headless: false,
+        trace: 'on-first-retry',
+        screenshot: 'on',
+        video: 'on',
     },
+
+    // Configure projects for different browsers
+    projects: [
+        {
+            name: 'chromium',
+            use: {
+                ...devices['Desktop Chrome'],
+
+            },
+        },
+        {
+            name: 'firefox',
+            use: {
+                ...devices['Desktop Firefox'],
+                launchOptions: {
+
+                    args: ['--start-maximized']
+                }
+            },
+        },
+
+
+    ],
 });
