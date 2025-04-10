@@ -18,7 +18,7 @@ export default defineConfig({
         video: 'on',
     },
 
-    // Configure projects for different browsers
+
     projects: [
         {
             name: 'chromium',
