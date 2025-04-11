@@ -2,6 +2,7 @@ import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
 import { UserData } from '../testdata';
 import { Helpers } from '../utils/helpers';
+import path from 'path';
 
 export class EducationPage extends BasePage {
     readonly schoolNameInput: Locator;
@@ -49,16 +50,12 @@ export class EducationPage extends BasePage {
         await this.schoolZipCodeInput.fill(education.schoolZipCode);
         await this.gpaInput.fill(education.gpa);
         await this.graduationYearInput.fill(education.graduationYear);
-    }
 
-    async uploadTranscript(filePath: string) {
         await this.uploadButton.scrollIntoViewIfNeeded();
-        await this.fileInput.setInputFiles(filePath);
+        await this.fileInput.setInputFiles('file/MySchoolTranscript.pdf');
         await this.page.getByText('MySchoolTranscript.pdf').waitFor();
-        await this.page.waitForTimeout(6000);
-    }
+        await this.page.waitForTimeout(3000);
 
-    async goToNextPage() {
         this.page.waitForTimeout(3000)
         await this.nextPageButton.click();
         this.page.waitForTimeout(3000)

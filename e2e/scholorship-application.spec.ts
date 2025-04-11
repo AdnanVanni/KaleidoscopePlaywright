@@ -19,7 +19,7 @@ test.describe('Scholarship Application', () => {
         // Generate random email
         const email = Helpers.generateRandomEmail();
         const password = testUser.password;
-        const filePath = path.join(process.cwd(), 'file', 'MySchoolTranscript.pdf');
+
 
 
         await loginPage.navigate();
@@ -32,22 +32,10 @@ test.describe('Scholarship Application', () => {
                 phone: testUser.phone
             }
         );
-
-
         await personalInfoPage.fillPersonalInfo(testUser.address);
-
-
         await extracurricularPage.fillAllExtracurriculars(testUser.extracurriculars);
-
-
         await educationPage.fillEducationInfo(testUser.education);
-        await educationPage.uploadTranscript(filePath);
-        await educationPage.goToNextPage();
-
-
         await essayPage.fillEssays(testUser.essays);
-
-
         await essayPage.verifyEssays();
         await essayPage.submitApplication();
         await essayPage.verifySubmissionSuccess();
