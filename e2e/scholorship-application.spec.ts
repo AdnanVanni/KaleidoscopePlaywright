@@ -21,7 +21,7 @@ test.describe('Scholarship Application', () => {
         const password = testUser.password;
 
 
-
+        //navigate to page
         await loginPage.navigate();
         await loginPage.Register(
             email,
@@ -32,12 +32,19 @@ test.describe('Scholarship Application', () => {
                 phone: testUser.phone
             }
         );
+        // personal page date filling
         await personalInfoPage.fillPersonalInfo(testUser.address);
+        //Fill ExtracurricularPage activities
         await extracurricularPage.fillAllExtracurriculars(testUser.extracurriculars);
+        //Fill education related information
         await educationPage.fillEducationInfo(testUser.education);
+        //Fill Essays
         await essayPage.fillEssays(testUser.essays);
+        //Verify essays are appearing
         await essayPage.verifyEssays();
+        //submite application
         await essayPage.submitApplication();
+        //Verify submission
         await essayPage.verifySubmissionSuccess();
     });
 });
